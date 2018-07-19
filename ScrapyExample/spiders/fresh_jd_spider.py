@@ -12,6 +12,7 @@ class QuotesSpider(scrapy.Spider):
     start_url = 'https://fresh.jd.com/'
     property_map={u"商品名称":'name', u"商品编号":'ID', u'商品毛重':'net_weight', u'重量':'weight', 
     u'商品产地':'place', u"原产地":'origin_place', u"分类":'category', u"国产/进口":'dome_import',
+    u'品种':'variety', u'店铺':'shop_name', u'包装':'packing', u'烹饪建议':'cook'
     }
 
     def start_requests(self):
