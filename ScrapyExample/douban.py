@@ -27,7 +27,7 @@ with open('test.txt', 'w') as f:
 url = 'https://item.jd.com/3927947.html'
 response = urllib2.urlopen(url)
 html = response.read()
-with open('test.txt', 'w') as f:
+with open('test_jd.txt', 'w') as f:
     f.write(html)
 
 

@@ -6,6 +6,7 @@ import re
 import json
 from scrapy.selector import Selector
 from ScrapyExample.jd_items import JdItem
+import os
 
 class QuotesSpider(scrapy.Spider):
     name = "fresh"
@@ -32,9 +33,18 @@ class QuotesSpider(scrapy.Spider):
         urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', json_string)
 
         print len(urls)
-
+ 
+        #with open('url.txt', 'w') as f:
+        #    for url in urls: 
+        #        f.write(url + os.linesep)
+        
         for url in urls:
-             yield scrapy.Request(url,callback=self.parse_page)    
+            if("https://search.jd.com/search?keyword=" in url):
+                for i in range(1,101):
+                    page_url = url + "&page=" + str(i*2-1)     
+                    yield scrapy.Request(page_url,callback=self.parse_page)
+            else: 
+                yield scrapy.Request(url,callback=self.parse_page)    
     
     def parse_page(self, response):
         print response.url
