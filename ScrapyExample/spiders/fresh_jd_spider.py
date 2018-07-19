@@ -10,7 +10,9 @@ from ScrapyExample.jd_items import JdItem
 class QuotesSpider(scrapy.Spider):
     name = "fresh"
     start_url = 'https://fresh.jd.com/'
-    property_map={}
+    property_map={u"商品名称":'name', u"商品编号":'ID', u'商品毛重':'net_weight', u'重量':'weight', 
+    u'商品产地':'place', u"原产地":'origin_place', u"分类":'category', u"国产/进口":'dome_import',
+    }
 
     def start_requests(self):
         yield scrapy.Request(url=self.start_url, callback=self.parse)
@@ -57,22 +59,8 @@ class QuotesSpider(scrapy.Spider):
             text = intro.xpath('text()').extract()
             text_s = ''.join(text)
             name, value = text_s.split(u'：')
-            if name == u'重量':
-                item1['weight'] = value
-            elif name == u'商品毛重':
-                item1['net_weight'] = value
-            elif name == u'商品产地':
-                item1['place'] = value
-            elif name == u"原产地":
-                item1['origin_place'] = value
-            elif name == u"分类":
-                item1['category'] = value
-            elif name == u"国产/进口":
-                item1['dome_import'] = value
-            elif name == u"商品名称":
-                item1['name'] = value
-            elif name == u"商品编号":
-                item1['ID'] = value
+            if name in self.property_map:
+                item1[self.property_map[name]] = value             
             else:
                 print 'name'
-            yield item1       
+        yield item1       
