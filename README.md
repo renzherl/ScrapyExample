@@ -1,19 +1,22 @@
 # ScrapyExample
-tutorial-Scrapy tutorial
-dmoz-http://www.dmoz.org/
-MiApp-Get app package name from http://app.mi.com/
-PythonExample-Practice
-Jd-Scrapy tutorial and scrapy https://fresh.jd.com/
-Suning-Scrapy for https://search.suning.com/
+> Jd---Scrapy tutorial and scrapy https://fresh.jd.com/<br />
+> MiApp---Get app package name from http://app.mi.com/<br />
+> PythonExample---Practice<br />
+> Suning---Scrapy for https://search.suning.com/<br />
+> dmoz----http://www.dmoz.org/<br />
+> tutorialScrapy---tutorial<br />
+> .gitignore<br />
+> README.md<br />
 
-#Install
-Installing Scrapy guide:https://doc.scrapy.org/en/latest/intro/install.html#intro-install
+## Install
+Installing Scrapy guide:https://doc.scrapy.org/en/latest/intro/install.html#intro-install<br />
 
-#Run
-cd MiApp
-scrapy crawl miapp -o miapp.csv -t csv
+## Run
+*cd MiApp*<br />
+*scrapy crawl miapp -o miapp.csv -t csv*<br />
 
-cd Jd
-scrapy crawl fresh -o fresh.json
+*cd Jd*<br />
+*scrapy crawl fresh -o fresh.json*<br />
+
 
 
