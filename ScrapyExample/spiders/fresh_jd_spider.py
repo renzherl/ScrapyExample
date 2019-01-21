@@ -15,6 +15,7 @@ class QuotesSpider(scrapy.Spider):
     u'商品产地':'place', u"原产地":'origin_place', u"分类":'category', u"国产/进口":'dome_import',
     u'品种':'variety', u'店铺':'shop_name', u'包装':'packing', u'烹饪建议':'cook'
     }
+    pids = set()
 
     def start_requests(self):
         yield scrapy.Request(url=self.start_url, callback=self.parse)
@@ -22,8 +23,7 @@ class QuotesSpider(scrapy.Spider):
     def parse(self, response):
         if response.status==200:
             print response.url
-        pids = set()
-        
+
         head_items = response.xpath("//script[contains(., 'navFirst')]/text()") #get link from <script>
         head_items_txt = head_items.extract_first()
         start = head_items_txt.find('data:') + 6
@@ -37,7 +37,7 @@ class QuotesSpider(scrapy.Spider):
         #with open('url.txt', 'w') as f:
         #    for url in urls: 
         #        f.write(url + os.linesep)
-        
+
         for url in urls:
             if("https://search.jd.com/search?keyword=" in url):
                 for i in range(1,101):
@@ -53,7 +53,7 @@ class QuotesSpider(scrapy.Spider):
         print len(goods) # 60 goods per page
         for good in goods:
            item1 = JdItem()
-           item1['ID'] = good.xpath('./div/@data-sku').extract()
+           item1['ID'] = good.xpath('./div/@data-sku').extract()         
            item1['name'] = good.xpath('./div/div[@class="p-name"]/a/em/text()').extract()
            item1['shop_name'] = good.xpath('./div/div[@class="p-shop"]/@data-shop_name').extract()
            item1['link'] = good.xpath('./div/div[@class="p-img"]/a/@href').extract()
