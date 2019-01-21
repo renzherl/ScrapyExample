@@ -4,7 +4,7 @@
 > PythonExample---Practice<br />
 > Suning---Scrapy for https://search.suning.com/<br />
 > dmoz----http://www.dmoz.org/<br />
-> tutorialScrapy---tutorial<br />
+> tutorial---Scrapytutorial<br />
 > .gitignore<br />
 > README.md<br />
 
